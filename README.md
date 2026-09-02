@@ -42,6 +42,7 @@ A MERN application for tracking job applications.
    PORT=5000
    MONGODB_URL=your_mongodb_connection_string
    JWT_SECRET=your_long_random_secret
+   CLIENT_URL=http://localhost:5173
    ```
 
 Do not commit `server/.env`. It is already excluded by `.gitignore`.
@@ -53,6 +54,8 @@ Do not commit `server/.env`. It is already excluded by `.gitignore`.
 | `PORT` | Port used by the Express server. Use `5000` to match the Vite proxy. |
 | `MONGODB_URL` | Full MongoDB connection string. |
 | `JWT_SECRET` | Secret used to sign and verify authentication tokens. |
+| `CLIENT_URL` | Frontend origin allowed to access the API. Use `http://localhost:5173` locally. |
+| `VITE_API_URL` | Public API URL used by the deployed client. It is optional locally because Vite uses a proxy. |
 
 ## Development
 
@@ -78,3 +81,26 @@ npm run dev --prefix server
 ```bash
 npm run dev --prefix client
 ```
+
+## Deployment environment variables
+
+When the client and server are deployed to different domains, configure the
+following values in the hosting provider.
+
+Server:
+
+```env
+MONGODB_URL=your_mongodb_connection_string
+JWT_SECRET=your_long_random_secret
+CLIENT_URL=https://your-client-domain.onrender.com
+```
+
+Client:
+
+```env
+VITE_API_URL=https://your-server-domain.onrender.com/api/v1
+```
+
+Do not add a trailing slash to these URLs. The client URL is used by the server
+to allow cross-origin requests, and the API URL is included in the client at
+build time.

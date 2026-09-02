@@ -2,6 +2,10 @@
 
 A MERN application for tracking job applications.
 
+## Live Demo
+
+[Open Job Board](https://job-board-client-dww9.onrender.com)
+
 ## Prerequisites
 
 - Node.js 20.19 or newer
